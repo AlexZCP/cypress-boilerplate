@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open"
+    "test": "cypress open",
+    "silent": "cypress run",
+    "silent:api": "cypress run --spec 'cypress/integration/api-tests/**/*'"
   },
   "keywords": [],
   "author": "",
