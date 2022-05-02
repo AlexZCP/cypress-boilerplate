@@ -1,0 +1,4 @@
+{
+   "baseUrl": "http://api.beta.cloudprinter.com/cloudadmin/1.0/",
+   "integrationFolder": "cypress/integration/api-tests"
+}
