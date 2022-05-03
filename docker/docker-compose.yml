@@ -1,10 +1,9 @@
-version: '1'
 services:
   cypress-tests:
     build:
-      context: cypress-tests
+      context: .
       dockerfile: ./Dockerfile
     container_name: cypress-tests
-    restart: always
-    ports:
-      - "8080:80"
+    environment:
+    - x-auth-s=${xAuthS}
+    - x-auth-u=${xAuthU}
