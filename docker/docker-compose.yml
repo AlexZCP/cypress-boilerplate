@@ -1,0 +1,10 @@
+version: '1'
+services:
+  cypress-tests:
+    build:
+      context: cypress-tests
+      dockerfile: ./Dockerfile
+    container_name: cypress-tests
+    restart: always
+    ports:
+      - "8080:80"
