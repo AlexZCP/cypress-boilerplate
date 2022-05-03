@@ -7,8 +7,8 @@ describe('Category types Core API testing', () => {
       url: 'bluecloud/category_types',
       headers: {
         'Content-Type': 'application/json',
-        'x-auth-s': Cypress.env('x-auth-s'),
-        'x-auth-u': Cypress.env('x-auth-u')
+        'x-auth-s': Cypress.env('xAuthS'),
+        'x-auth-u': Cypress.env('xAuthU')
       }
     }).as('categoryTypesRequest');
     cy.get('@categoryTypesRequest').then( items => {

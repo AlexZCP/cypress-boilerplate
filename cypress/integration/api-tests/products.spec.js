@@ -7,8 +7,8 @@ describe('Products Core API testing', () => {
       url: 'bluecloud/products',
       headers: {
         'Content-Type': 'application/json',
-        'x-auth-s': Cypress.env('x-auth-s'),
-        'x-auth-u': Cypress.env('x-auth-u')
+        'x-auth-s': Cypress.env('xAuthS'),
+        'x-auth-u': Cypress.env('xAuthU')
       }
     }).as('productsRequest');
     cy.get('@productsRequest').then(products => {
