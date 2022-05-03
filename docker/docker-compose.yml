@@ -5,5 +5,5 @@ services:
       dockerfile: ./Dockerfile
     container_name: cypress-tests
     environment:
-    - x-auth-s=${xAuthS}
-    - x-auth-u=${xAuthU}
+    - cypress_xAuthS=${xAuthS}
+    - cypress_xAuthS=${xAuthU}
