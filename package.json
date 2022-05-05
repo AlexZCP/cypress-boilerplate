@@ -6,7 +6,8 @@
   "scripts": {
     "test": "cypress open",
     "silent": "cypress run",
-    "silent:api": "cypress run --reporter progress --spec 'cypress/integration/api-tests/**/*'"
+    "silent:api": "cypress run --reporter progress --spec 'cypress/integration/api-tests/**/*'",
+    "ui-tests": "cypress run --reporter progress --spec 'cypress/integration/ui-tests/**/*'"
   },
   "keywords": [],
   "author": "",
