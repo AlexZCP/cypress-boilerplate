@@ -1,8 +1,10 @@
 {
-   "baseUrl": "http://api.beta.cloudprinter.com/cloudadmin/1.0/",
+   "baseUrl": "https://api.thevividtiger.com/cloudadmin/1.0/",
    "integrationFolder": "cypress/integration/",
+
+   "projectId": "zw6dfc", 
 
    "video": false,
    "screenshotOnRunFailure": false
-
 }
+

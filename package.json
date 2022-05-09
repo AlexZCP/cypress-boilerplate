@@ -6,8 +6,10 @@
   "scripts": {
     "test": "cypress open",
     "silent": "cypress run",
+    "quiet": "cypress run --quiet",
     "silent:api": "cypress run --reporter progress --spec 'cypress/integration/api-tests/**/*'",
-    "ui-tests": "cypress run --reporter progress --spec 'cypress/integration/ui-tests/**/*'"
+    "ui-tests": "cypress run --reporter progress --spec 'cypress/integration/ui-tests/**/*'",
+    "quiet-log-to-file": "cypress run 1> test-results.txt && if grep -q '$STRING' '$FILE' then echo '------SUCCESS-----'"
   },
   "keywords": [],
   "author": "",
