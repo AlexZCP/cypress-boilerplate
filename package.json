@@ -9,8 +9,9 @@
     "quiet": "cypress run --quiet",
     "silent:api": "cypress run --reporter progress --spec 'cypress/integration/api-tests/**/*'",
     "ui-tests": "cypress run --reporter progress --spec 'cypress/integration/ui-tests/**/*'",
-    "quiet-log-to-file": "cypress run 1> test-results.txt && if grep -q '$STRING' '$FILE' then echo '------SUCCESS-----'"
+    "log-report-to-file": "cypress run --quiet 1> test-results.txt || true && sh echo_message.sh "
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
