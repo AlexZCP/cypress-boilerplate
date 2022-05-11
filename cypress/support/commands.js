@@ -35,3 +35,15 @@ Cypress.Commands.add("order_quote_request", () => {
     body: Cypress.env('cloudcore').order_quote_request_body
   }).as('orderQuoteRequest');
 });
+
+Cypress.Commands.add('add_order_request', () => { 
+  cy.request({
+    method: 'POST',
+    url: 'orders/add',
+    headers:{
+        'content-type': 'application/json',
+        'Authorization': Cypress.env('cloudapps').bearer
+    },
+    body: Cypress.env('cloudapps').add_order_request_body
+  }).as('addOrder');
+});
