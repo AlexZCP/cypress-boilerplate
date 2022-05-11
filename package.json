@@ -4,17 +4,33 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "cloud_admin:api": "npx cypress run --config-file cloud_admin.json --spec 'cypress/integration/cloud_admin/api/**/*' 1> cypress/integration/cloud_admin/api/test-results.txt || true && sh echo_message.sh",
+    "cloud_admin:ui": "npx cypress run --config-file cloud_admin.json --spec 'cypress/integration/cloud_admin/ui/**/*' 1> cypress/integration/cloud_admin/ui/test-results.txt || true && sh echo_message.sh",
+    "cloud_admin": "npx cypress run --config-file cloud_admin.json",
+    "cloud_admin:open": "cypress open --config-file cloud_admin.json",
+
+    "cloudprinter-web-site:api": "npx cypress run --config-file cloudprinter-web-site.json --spec 'cypress/integration/cloudprinter-web-site/api/**/*' 1> cypress/integration/cloudprinter-web-site/api/test-results.txt || true && sh echo_message.sh",
+    "cloudprinter-web-site:ui": "npx cypress run --config-file cloudprinter-web-site.json --spec 'cypress/integration/cloudprinter-web-site/ui/**/*' 1> cypress/integration/cloudprinter-web-site/ui/test-results.txt || true && sh echo_message.sh",
+    "cloudprinter-web-site": "npx cypress run --config-file cloudprinter-web-site.json",
+    "cloudprinter-web-site:open": "cypress open --config-file cloudprinter-web-site.json",
+
+
+
+
+
+
+
     "test": "cypress open",
     "silent": "cypress run",
-    "quiet": "cypress run --quiet",
     "silent:api": "cypress run --reporter progress --spec 'cypress/integration/api-tests/**/*'",
     "ui-tests": "cypress run --reporter progress --spec 'cypress/integration/ui-tests/**/*'",
     "log-report-to-file": "cypress run --quiet 1> test-results.txt || true && sh echo_message.sh ",
     "clean:reports": "rm -R -f cypress/reports && mkdir cypress/reports && mkdir cypress/reports/mochareports",
     "combine-reports": "mochawesome-merge cypress/reports/mocha/*.json > cypress/reports/mochareports/report.json",
-    "generate-report": "marge cypress/reports/mochareports/report.json -f report -o cypress/reports/mochareports",
+    "generate-report": "merge cypress/reports/mochareports/report.json -f report -o cypress/reports/mochareports",
     "posttest": "npm run combine-reports && npm run generate-report",
-    "test-with-report": "npm run clean:reports && npm run log-report-to-file &&  npm run posttest"
+    "test-with-report": "npm run clean:reports && npm run log-report-to-file &&  npm run posttest",
+    "order": "cypress run --quiet --spec 'cypress/integration/ui-tests/new_order_via_quick.spec.js'"
   },
   "keywords": [],
   "author": "",
