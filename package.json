@@ -4,6 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+
+    "cloudapps": "npx cypress run --config-file cloudapps.json",
+    "cloudapps:open": "cypress open --config-file cloudapps.json",
+    "cloudapps:api": "npm run cloudapps --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+
     "cloud_admin": "npx cypress run --config-file cloud_admin.json",
     "cloud_admin:open": "cypress open --config-file cloud_admin.json",
     "cloud_admin:api": "npm run cloud_admin --spec 'cypress/integration/cloud_admin/api/**/*' 1> test-results.txt || true && sh echo_message.sh",

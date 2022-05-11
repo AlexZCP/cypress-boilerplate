@@ -1,0 +1,10 @@
+{
+  "baseUrl": "https://api.cloudprinter.com/cloudcore/1.0/",
+  "integrationFolder": "cypress/integration/cloudapps/",
+  "testFiles": "**/*.spec.js",
+
+  "video": false,
+  "screenshotOnRunFailure": false
+
+}
+

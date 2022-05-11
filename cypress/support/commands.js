@@ -25,70 +25,47 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 // import "cypress-localstorage-commands";
 
-const user_data ={
-  "status": {
-      "read": 1
-  },
-  "organization": {
-      "name": "CloudPrinter QA",
-      "type": 2,
-      "access": 2,
-      "network_mode": 1,
-      "subscription": 1,
-      "payment": 3,
-      "hash": "6d14a09d37eb2926a4af7f4fa309adc5784a8cf4c18c1ab75713ee0375d20ccb"
-  },
-  "account": null,
-  "user": {
-      "name": "Test Account",
-      "email": "c8@cloudprinter.com",
-      "login_count": 1511,
-      "login_date": "2022-05-09 06:25:35"
-  },
-  "features": []
-}
+const orderQuoteRequest = {
+  "apikey": "0739d2965f2368d08bd79044c9f44164",
+  "country": "MY",
+  "state": "West",
+  "items": [
+      {
+        "reference": "1",
+        "product": "photobook_cw_a4_l_fc",
+        "count": "1",
+        "options": [
+          {
+            "type": "pageblock_200mcg",
+            "count": "1"
+          },
+          {
+            "type": "cover_130mcg",
+            "count": "1"
+          },
+          {
+            "type": "cover_finish_matte",
+            "count": 1
+          },
+          {
+            "type": "total_pages",
+            "count": 119
+          },
+          {
+            "type": "pageblock_finish_none",
+            "count": 1
+          }
+        ]
+      }]      
+  }
 
-const auth_data = {
-  "access_token": "ef418600bce83d1c9c24433ea45c69bdd4371d38",
-  "expires_in": 31536000,
-  "token_type": "Bearer",
-  "scope": "read-write",
-  "refresh_token": "807688b785479acd8130fc5167da38b351879353"
-}
-
-Cypress.Commands.add('login', () => { 
+Cypress.Commands.add("order_quote_request", () => {
   cy.request({
     method: 'POST',
-    url: 'https://api.thevividtiger.com/cloudapps/1.0/orders',
-    headers:{
-        'content-type': 'application/json',
-        'Authorization': 'Bearer ef418600bce83d1c9c24433ea45c69bdd4371d38'
-    }
-  }).then((response) => {
-    // cy.setLocalStorage('token',response.body.token.authorization )
-    cy.setLocalStorage('auth_data', JSON.stringify(auth_data) )
-    cy.setLocalStorage('user_data', JSON.stringify(user_data) )
-    // cy.getLocalStorage('token').then(token => {
-    //   cy.log("the token", token); // I get JWT Token in here
-    // });
-  })
+    url: 'orders/quote',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: orderQuoteRequest
+  }).as('orderQuoteRequest');
 });
-
-
-//STRUCTURE WORKS
-// Cypress.Commands.add('login', () => { 
-//   cy.request({
-//     method: 'POST',
-//     url: 'https://api.thevividtiger.com/cloudapps/1.0/orders',
-//     headers:{
-//         'content-type': 'application/json',
-//         'Authorization': 'Bearer ef418600bce83d1c9c24433ea45c69bdd4371d38'
-//     }
-//   }).then((response) => {
-//     // cy.setLocalStorage('token',response.body.token.authorization )
-//     cy.setLocalStorage('token', 'Bearer ef418600bce83d1c9c24433ea45c69bdd4371d38' )
-//     // cy.getLocalStorage('token').then(token => {
-//     //   cy.log("the token", token); // I get JWT Token in here
-//     // });
-//   })
-// });
