@@ -25,40 +25,6 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 // import "cypress-localstorage-commands";
 
-const orderQuoteRequest = {
-  "apikey": "0739d2965f2368d08bd79044c9f44164",
-  "country": "MY",
-  "state": "West",
-  "items": [
-      {
-        "reference": "1",
-        "product": "photobook_cw_a4_l_fc",
-        "count": "1",
-        "options": [
-          {
-            "type": "pageblock_200mcg",
-            "count": "1"
-          },
-          {
-            "type": "cover_130mcg",
-            "count": "1"
-          },
-          {
-            "type": "cover_finish_matte",
-            "count": 1
-          },
-          {
-            "type": "total_pages",
-            "count": 119
-          },
-          {
-            "type": "pageblock_finish_none",
-            "count": 1
-          }
-        ]
-      }]      
-  }
-
 Cypress.Commands.add("order_quote_request", () => {
   cy.request({
     method: 'POST',
@@ -66,6 +32,6 @@ Cypress.Commands.add("order_quote_request", () => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: orderQuoteRequest
+    body: Cypress.env('cloudapps').order_quote_request_body
   }).as('orderQuoteRequest');
 });
