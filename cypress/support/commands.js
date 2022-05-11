@@ -32,6 +32,6 @@ Cypress.Commands.add("order_quote_request", () => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: Cypress.env('cloudapps').order_quote_request_body
+    body: Cypress.env('cloudcore').order_quote_request_body
   }).as('orderQuoteRequest');
 });
