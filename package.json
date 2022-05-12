@@ -4,20 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cloudapps": "npx cypress run --config-file cloudapps.json",
+    "cloudapps": "npx cypress run --quiet --config-file cloudapps.json",
     "cloudapps:open": "cypress open --config-file cloudapps.json",
     "cloudapps:api": "npm run cloudapps --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
 
-    "cloudcore": "npx cypress run --config-file cloudcore.json",
+    "cloudcore": "npx cypress run --quiet --config-file cloudcore.json",
     "cloudcore:open": "cypress open --config-file cloudcore.json",
     "cloudcore:api": "npm run cloudcore --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
 
-    "cloud_admin": "npx cypress run --config-file cloud_admin.json",
+    "cloud_admin": "npx cypress run --quiet --config-file cloud_admin.json",
     "cloud_admin:open": "cypress open --config-file cloud_admin.json",
     "cloud_admin:api": "npm run cloud_admin --spec 'cypress/integration/cloud_admin/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
     "cloud_admin:ui": "npm run cloud_admin --spec 'cypress/integration/cloud_admin/ui/**/*' 1> test-results.txt || true && sh echo_message.sh",
 
-    "cloudprinter-web-site": "npx cypress run --config-file cloudprinter-web-site.json",
+    "cloudprinter-web-site": "npx cypress run --quiet --config-file cloudprinter-web-site.json",
     "cloudprinter-web-site:open": "cypress open --config-file cloudprinter-web-site.json",
     "cloudprinter-web-site:api": "npx cypress run --config-file cloudprinter-web-site.json --spec 'cypress/integration/cloudprinter-web-site/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
     "cloudprinter-web-site:ui": "npx cypress run --config-file cloudprinter-web-site.json --spec 'cypress/integration/cloudprinter-web-site/ui/**/*' 1> test-results.txt || true && sh echo_message.sh",
