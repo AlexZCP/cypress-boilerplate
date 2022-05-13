@@ -5,7 +5,8 @@ dist
 # local env files
 *.local
 *env*
-*.env*
+!example.env*
+
 
 #cypress special reports
 cypress/videos/*

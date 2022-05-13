@@ -25,19 +25,6 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 // import "cypress-localstorage-commands";
 
-Cypress.Commands.add("order_quote_request", () => {
-  cy.log(`!!!!!!!!TEST: ${Cypress.env("url")}`)
-  cy.log(`!!!!!!!!TEST: ${Cypress.env("order_quote_request_body").apikey}`)
-  cy.request({
-    method: 'POST',
-    url: Cypress.env("url"),
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: Cypress.env("order_quote_request_body")
-  }).as('orderQuoteRequest');
-});
-
 // Cypress.Commands.add('add_order_request', () => { 
 //   cy.request({
 //     method: 'POST',

@@ -1,8 +1,15 @@
 describe('Add order quote', () => {
   
-  beforeEach(() => {
-    cy.order_quote_request()
-  });
+beforeEach(() => {
+  cy.request({
+    method: 'POST',
+    url: Cypress.env("url"),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: Cypress.env("order_quote_request_body")
+  }).as('orderQuoteRequest');
+});
 
   it('should get status 200', () => {
     cy.get('@orderQuoteRequest').then(orderQuote => {
