@@ -1,3 +1,4 @@
+require('dotenv').config()
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -17,20 +18,30 @@
  */
 // eslint-disable-next-line no-unused-vars
 
+// const getCloudCoreConfig = (config) => {
+//   const envConfig = readConfig(`cloudcore/.env.${config.env.environment}`)
+
+//   config.env = {...config.env, ...envConfig}
+//   return config;
+// }
+
+
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   // require('cypress-mochawesome-reporter/plugin')(on);
 
-  const readConfig = require('read-config')
-  const configWithDotenv = require('dotenv').config();
-  if (configWithDotenv.error) {
-    throw configWithDotenv.error;
-  }
+  // switch(config.env.app_name) {
+  //   case "cloudcore":
+  //     return getCloudCoreConfig(config);
+  //   case "cloudapps":
+  //     return getCloudAppsConfig(config);
+  // }
 
-  const envConfig = readConfig(`cypress/integration/${config.env.app_name}/config/env.${config.env.environment}.json`)
+  // console.log(config.env);
+  // const readConfig = require('read-config');
+  // const envConfig = readConfig(`cypress/integration/${config.env.app_name}/config/.env.${config.env.environment}`)
 
-  config.env = {...config.env, ...envConfig}
-
+  // config.env = {...config.env, ...envConfig}
   return config;
 }

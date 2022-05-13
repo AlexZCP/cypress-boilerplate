@@ -1,9 +1,0 @@
-{
-  "baseUrl": "https://api.thevividtiger.com/cloudadmin/1.0/",
-  "integrationFolder": "cypress/integration/cloud_admin/",
-  "testFiles": "**/*.spec.js",
-
-  "video": false,
-  "screenshotOnRunFailure": false
-}
-

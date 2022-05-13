@@ -1,0 +1,12 @@
+{
+  "baseUrl": "https://api.thevividtiger.com/cloudcore/1.0",
+  "integrationFolder": "cypress/integration/cloudcore/",
+  "testFiles": "**/*.spec.js",
+
+  "video": false,
+  "screenshotOnRunFailure": false,
+
+  "env": {
+    "app_name": "cloudapps"
+  }
+}

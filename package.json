@@ -3,46 +3,51 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "cloudapps": "npx cypress run --quiet --config-file cloudapps.json",
-    "cloudapps:open": "cypress open --config-file cloudapps.json",
-    "cloudapps:api": "npm run cloudapps --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+  "scripts": {  
+    "cloudcore:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json'",
+    "cloudcore:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json'",
+    "cloudcore:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
 
-    "cloudcore": "npx cypress run --quiet --config-file cloudcore.json",
-    "cloudcore:open": "cypress open --config-file cloudcore.json",
-    "cloudcore:api": "npm run cloudcore --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+    "cloudcore:stage": "npx cypress run --quiet --env environment=stage --config-file 'cypress/integration/cloudcore/config/cypress.json'",
+    "cloudcore:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudcore/config/cypress.json'",
+    "cloudcore:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
 
-    "cloud_admin": "npx cypress run --quiet --config-file cloud_admin.json",
-    "cloud_admin:open": "cypress open --config-file cloud_admin.json",
-    "cloud_admin:api": "npm run cloud_admin --spec 'cypress/integration/cloud_admin/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
-    "cloud_admin:ui": "npm run cloud_admin --spec 'cypress/integration/cloud_admin/ui/**/*' 1> test-results.txt || true && sh echo_message.sh",
 
-    "cloudprinter-web-site": "npx cypress run --quiet --config-file cloudprinter-web-site.json",
-    "cloudprinter-web-site:open": "cypress open --config-file cloudprinter-web-site.json",
-    "cloudprinter-web-site:api": "npx cypress run --config-file cloudprinter-web-site.json --spec 'cypress/integration/cloudprinter-web-site/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
-    "cloudprinter-web-site:ui": "npx cypress run --config-file cloudprinter-web-site.json --spec 'cypress/integration/cloudprinter-web-site/ui/**/*' 1> test-results.txt || true && sh echo_message.sh",
+    "cloudapps:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json'",
+    "cloudapps:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json'",
+    "cloudapps:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+
+    "cloudapps:stage": "npx cypress run --quiet --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json'",
+    "cloudapps:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json'",
+    "cloudapps:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+
+
+    "cloudadmin:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
+    "cloudadmin:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudcloudadmincore/config/cypress.json'",
+    "cloudadmin:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+    "cloudadmin:ui:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/ui/**/*' 1> test-results.txt || true && sh echo_message.sh",
+
+    "cloudadmin:stage": "npx cypress run --quiet --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
+    "cloudadmin:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
+    "cloudadmin:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+    "cloudadmin:ui:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/ui/**/*' 1> test-results.txt || true && sh echo_message.sh",
+
 
     "test": "cypress open",
     "silent": "cypress run",
     "silent:api": "cypress run --reporter progress --spec 'cypress/integration/api-tests/**/*'",
     "ui-tests": "cypress run --reporter progress --spec 'cypress/integration/ui-tests/**/*'",
-    "log-report-to-file": "cypress run --quiet 1> test-results.txt || true && sh echo_message.sh ",
-    
-    "clean:reports": "rm -R -f cypress/reports && mkdir cypress/reports && mkdir cypress/reports/mochareports",
-    "combine-reports": "mochawesome-merge cypress/reports/mocha/*.json > cypress/reports/mochareports/report.json",
-    "generate-report": "marge cypress/reports/mochareports/report.json -f report -o cypress/reports/mochareports",
-    "posttest": "npm run combine-reports && npm run generate-report",
-    "test-with-report": "npm run clean:reports && npm run log-report-to-file &&  npm run posttest",
-    "order": "cypress run --quiet --spec 'cypress/integration/ui-tests/new_order_via_quick.spec.js'"
+    "log-report-to-file": "cypress run --quiet 1> test-results.txt || true && sh echo_message.sh"
   },
-  
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cypress": "^9.6.0",
     "cypress-localstorage-commands": "^1.7.0",
-    "puppeteer": "^13.7.0"
+    "dotenv": "^16.0.1",
+    "puppeteer": "^13.7.0",
+    "read-config": "^2.0.0"
   },
   "devDependencies": {
     "cypress-mochawesome-reporter": "^3.0.1",

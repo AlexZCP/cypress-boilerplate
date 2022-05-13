@@ -4,8 +4,11 @@ dist
 
 # local env files
 *.local
+*env*
+*.env*
 
 #cypress special reports
 cypress/videos/*
 cypress/screenshots/*
 docker/cypress-boilerplate
+*test-results.txt
