@@ -1,7 +1,9 @@
 describe('Add order', () => {
+
+  let orderRequestBody = Cypress.env('add_order_request_body')
+  orderRequestBody.reference = "qa" + Math.floor((Math.random() * 99999));
   
   before(() => {
-    // cy.add_order_request()
     cy.request({
       method: 'POST',
       url: 'orders/add',
@@ -9,7 +11,7 @@ describe('Add order', () => {
           'content-type': 'application/json',
           'Authorization': Cypress.env('bearer')
       },
-      body: Cypress.env('add_order_request_body')
+      body: orderRequestBody
     }).as('addOrder');
   });
 
