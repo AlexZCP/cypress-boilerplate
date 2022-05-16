@@ -1,6 +1,6 @@
 describe('Add order quote with invalid quantity', () => {
 
-  const INVALID_ORDER_COUNT = 101
+  const INVALID_ORDER_COUNT = 1001
   let orderQuoteRequestBody = Cypress.env("order_quote_request_body")
   orderQuoteRequestBody.items[0].count = INVALID_ORDER_COUNT
   
