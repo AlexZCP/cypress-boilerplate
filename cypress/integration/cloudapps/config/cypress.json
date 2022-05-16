@@ -1,6 +1,6 @@
 {
-  "baseUrl": "https://api.thevividtiger.com/cloudcore/1.0",
-  "integrationFolder": "cypress/integration/cloudcore/",
+  "baseUrl": "https://api.thevividtiger.com/cloudapps/1.0",
+  "integrationFolder": "cypress/integration/cloudapps/",
   "testFiles": "**/*.spec.js",
 
   "video": false,

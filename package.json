@@ -12,6 +12,10 @@
     "cloudcore:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudcore/config/cypress.json'",
     "cloudcore:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
 
+    "cloudcore:production": "npx cypress run --quiet --env environment=production --config-file 'cypress/integration/cloudcore/config/cypress.json'",
+    "cloudcore:open:production": "npx cypress open --env environment=production --config-file 'cypress/integration/cloudcore/config/cypress.json'",
+    "cloudcore:api:production": "npx cypress run  --env environment=production --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+
 
     "cloudapps:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json'",
     "cloudapps:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json'",
@@ -23,7 +27,7 @@
 
 
     "cloudadmin:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
-    "cloudadmin:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudcloudadmincore/config/cypress.json'",
+    "cloudadmin:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
     "cloudadmin:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
     "cloudadmin:ui:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/ui/**/*' 1> test-results.txt || true && sh echo_message.sh",
 

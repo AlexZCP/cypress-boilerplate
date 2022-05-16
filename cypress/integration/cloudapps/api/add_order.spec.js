@@ -1,7 +1,16 @@
 describe('Add order', () => {
   
   before(() => {
-    cy.add_order_request()
+    // cy.add_order_request()
+    cy.request({
+      method: 'POST',
+      url: 'orders/add',
+      headers:{
+          'content-type': 'application/json',
+          'Authorization': Cypress.env('bearer')
+      },
+      body: Cypress.env('add_order_request_body')
+    }).as('addOrder');
   });
 
   it('should add order', () => {

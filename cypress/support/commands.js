@@ -24,15 +24,3 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 // import "cypress-localstorage-commands";
-
-// Cypress.Commands.add('add_order_request', () => { 
-//   cy.request({
-//     method: 'POST',
-//     url: 'orders/add',
-//     headers:{
-//         'content-type': 'application/json',
-//         'Authorization': Cypress.env('cloudapps').bearer
-//     },
-//     body: Cypress.env('cloudapps').add_order_request_body
-//   }).as('addOrder');
-// });
