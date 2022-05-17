@@ -1,9 +1,8 @@
 describe('Make reorder', () => {
 
   let orderRequestBody = Cypress.env('order_request_body')
-  orderRequestBody.reference = "qa" + Math.floor((Math.random() * 99999))
+  orderRequestBody.reference = "qa-" + "reorder-" + Math.floor((Math.random() * 99999))
   orderRequestBody.items[0]['items : reorder_cause'] = "Item shipped but never received"
-  let reorderCause = orderRequestBody.items[0]['items : reorder_cause']
   
   before(() => {
     cy.request({
