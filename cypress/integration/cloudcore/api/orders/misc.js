@@ -1,0 +1,1 @@
+export const newOrderReference = "qa" + Math.floor(Math.random() * 99999);

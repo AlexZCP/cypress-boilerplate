@@ -7,9 +7,9 @@ dist
 *env*
 !example.env*
 
-
 #cypress special reports
 cypress/videos/*
 cypress/screenshots/*
 docker/cypress-boilerplate
 *test-results.txt
+reports/

@@ -13,7 +13,7 @@ describe('Gets info about product', () => {
           reference: productReference
        },
       }).then((response) => {
-        expect(response.status).to.eq(200);
+        expect(response.status).to.eq(208);
         expect(response.body.reference).to.eq(productReference)
       });
     });

@@ -6,20 +6,29 @@
   "scripts": {  
     "cloudcore:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json'",
     "cloudcore:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json'",
-    "cloudcore:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+    "cloudcore:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true",
 
     "cloudcore:stage": "npx cypress run --quiet --env environment=stage --config-file 'cypress/integration/cloudcore/config/cypress.json'",
     "cloudcore:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudcore/config/cypress.json'",
-    "cloudcore:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+    "cloudcore:api:stage": "npx cypress run --env environment=stage --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true",
 
     "cloudcore:production": "npx cypress run --quiet --env environment=production --config-file 'cypress/integration/cloudcore/config/cypress.json'",
     "cloudcore:open:production": "npx cypress open --env environment=production --config-file 'cypress/integration/cloudcore/config/cypress.json'",
-    "cloudcore:api:production": "npx cypress run  --env environment=production --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+    "cloudcore:api:production": "npx cypress run  --env environment=production --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true",
 
+    "cloudcore:clean:reports": "rm -rf cypress/integration/cloudcore/reports && mkdir cypress/integration/cloudcore/reports && mkdir cypress/integration/cloudcore/reports/mochareports",
+    "cloudcore:combine-reports": "mochawesome-merge cypress/integration/cloudcore/reports/mochawesome/*.json > cypress/integration/cloudcore/reports/mochareports/report.json",
+    "cloudcore:generate-report": "marge cypress/integration/cloudcore/reports/mochareports/report.json -f report -o cypress/integration/cloudcore/reports/mochareports",
+    "cloudcore:html": "marge cypress/integration/cloudcore/reports/mochareports/report.json --reportDir cypress/integration/cloudcore/reports/mochareports --inline",
+    "cloudcore:posttest": "npm run cloudcore:combine-reports && npm run cloudcore:generate-report && npm run cloudcore:html",
+
+    "cloudcore:api:local:report": "npm run cloudcore:clean:reports ; npm run cloudcore:api:local ; npm run cloudcore:posttest ; sh echo_message.sh",
+    "cloudcore:api:stage:report": "npm run cloudcore:clean:reports ; npm run cloudcore:api:stage ; npm run cloudcore:posttest ; sh echo_message.sh",
+    "cloudcore:api:production:report": "npm run cloudcore:clean:reports ; npm run cloudcore:api:production ; npm run cloudcore:posttest ; sh echo_message.sh",
 
     "cloudapps:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json'",
     "cloudapps:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json'",
-    "cloudapps:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+    "cloudapps:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true ; sh echo_message.sh",
 
     "cloudapps:stage": "npx cypress run --quiet --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json'",
     "cloudapps:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json'",
@@ -35,7 +44,6 @@
     "cloudadmin:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
     "cloudadmin:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
     "cloudadmin:ui:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/ui/**/*' 1> test-results.txt || true && sh echo_message.sh",
-
 
     "test": "cypress open",
     "silent": "cypress run",
