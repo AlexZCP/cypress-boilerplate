@@ -11,13 +11,14 @@
         "reporterEnabled": "mochawesome",
         "mochawesomeReporterOptions": {
             "reportDir": "cypress/integration/cloudcore/reports/mochawesome",
+            "reportFilename": "[status]_[datetime]-report",
+            "timestamp": "longDate",
             "quite": true,
             "overwrite": false,
             "html": false,
             "json": true
         }
     },
-
 
   "env": {
     "app_name": "cloudcore"

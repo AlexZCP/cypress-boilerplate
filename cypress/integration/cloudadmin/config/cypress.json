@@ -11,6 +11,8 @@
       "reporterEnabled": "mochawesome",
       "mochawesomeReporterOptions": {
           "reportDir": "cypress/integration/cloudadmin/reports/mochawesome",
+          "reportFilename": "[status]_[datetime]-report",
+          "timestamp": "longDate",
           "quite": true,
           "overwrite": false,
           "html": false,

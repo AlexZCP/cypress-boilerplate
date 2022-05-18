@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {  
+  "scripts": {
+
     "cloudcore:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json'",
     "cloudcore:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json'",
     "cloudcore:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true",
@@ -17,9 +18,9 @@
     "cloudcore:api:production": "npx cypress run  --env environment=production --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true",
 
     "cloudcore:clean:reports": "rm -rf cypress/integration/cloudcore/reports && mkdir cypress/integration/cloudcore/reports && mkdir cypress/integration/cloudcore/reports/mochareports",
-    "cloudcore:combine-reports": "mochawesome-merge cypress/integration/cloudcore/reports/mochawesome/*.json > cypress/integration/cloudcore/reports/mochareports/report.json",
-    "cloudcore:generate-report": "marge cypress/integration/cloudcore/reports/mochareports/report.json -f report -o cypress/integration/cloudcore/reports/mochareports",
-    "cloudcore:html": "marge cypress/integration/cloudcore/reports/mochareports/report.json --reportDir cypress/integration/cloudcore/reports/mochareports --inline",
+    "cloudcore:combine-reports": "TODAY=$(date \"+%Y-%m-%d\"); mochawesome-merge cypress/integration/cloudcore/reports/mochawesome/*.json > cypress/integration/cloudcore/reports/mochareports/report-$TODAY.json",
+    "cloudcore:generate-report": "TODAY=$(date \"+%Y-%m-%d\"); marge cypress/integration/cloudcore/reports/mochareports/report-$TODAY.json -f report -o cypress/integration/cloudcore/reports/mochareports",
+    "cloudcore:html": "TODAY=$(date \"+%Y-%m-%d\"); marge cypress/integration/cloudcore/reports/mochareports/report-$TODAY.json --reportDir cypress/integration/cloudcore/reports/mochareports --inline",
     "cloudcore:posttest": "npm run cloudcore:combine-reports && npm run cloudcore:generate-report && npm run cloudcore:html",
 
     "cloudcore:api:local:report": "npm run cloudcore:clean:reports ; npm run cloudcore:api:local ; npm run cloudcore:posttest ; sh echo_message.sh",
@@ -37,9 +38,9 @@
     "cloudadmin:ui:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/ui/**/*' 1> test-results.txt || true",
 
     "cloudadmin:clean:reports": "rm -rf cypress/integration/cloudadmin/reports && mkdir cypress/integration/cloudadmin/reports && mkdir cypress/integration/cloudadmin/reports/mochareports",
-    "cloudadmin:combine-reports": "mochawesome-merge cypress/integration/cloudadmin/reports/mochawesome/*.json > cypress/integration/cloudadmin/reports/mochareports/report.json",
-    "cloudadmin:generate-report": "marge cypress/integration/cloudadmin/reports/mochareports/report.json -f report -o cypress/integration/cloudadmin/reports/mochareports",
-    "cloudadmin:html": "marge cypress/integration/cloudadmin/reports/mochareports/report.json --reportDir cypress/integration/cloudadmin/reports/mochareports --inline",
+    "cloudadmin:combine-reports": "TODAY=$(date \"+%Y-%m-%d\"); mochawesome-merge cypress/integration/cloudadmin/reports/mochawesome/*.json > cypress/integration/cloudadmin/reports/mochareports/report-$TODAY.json",
+    "cloudadmin:generate-report": "TODAY=$(date \"+%Y-%m-%d\"); marge cypress/integration/cloudadmin/reports/mochareports/report-$TODAY.json -f report -o cypress/integration/cloudadmin/reports/mochareports",
+    "cloudadmin:html": "TODAY=$(date \"+%Y-%m-%d\"); marge cypress/integration/cloudadmin/reports/mochareports/report-$TODAY.json --reportDir cypress/integration/cloudadmin/reports/mochareports --inline",
     "cloudadmin:posttest": "npm run cloudadmin:combine-reports && npm run cloudadmin:generate-report && npm run cloudadmin:html",
 
     "cloudadmin:api:local:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:api:local ; npm run cloudadmin:posttest ; sh echo_message.sh",
@@ -59,9 +60,9 @@
     "cloudapps:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true",
 
     "cloudapps:clean:reports": "rm -rf cypress/integration/cloudapps/reports && mkdir cypress/integration/cloudapps/reports && mkdir cypress/integration/cloudapps/reports/mochareports",
-    "cloudapps:combine-reports": "mochawesome-merge cypress/integration/cloudapps/reports/mochawesome/*.json > cypress/integration/cloudapps/reports/mochareports/report.json",
-    "cloudapps:generate-report": "marge cypress/integration/cloudapps/reports/mochareports/report.json -f report -o cypress/integration/cloudapps/reports/mochareports",
-    "cloudapps:html": "marge cypress/integration/cloudapps/reports/mochareports/report.json --reportDir cypress/integration/cloudapps/reports/mochareports --inline",
+    "cloudapps:combine-reports": "TODAY=$(date \"+%Y-%m-%d\"); mochawesome-merge cypress/integration/cloudapps/reports/mochawesome/*.json > cypress/integration/cloudapps/reports/mochareports/report-$TODAY.json",
+    "cloudapps:generate-report": "TODAY=$(date \"+%Y-%m-%d\"); marge cypress/integration/cloudapps/reports/mochareports/report-$TODAY.json -f report -o cypress/integration/cloudapps/reports/mochareports",
+    "cloudapps:html": "TODAY=$(date \"+%Y-%m-%d\"); marge cypress/integration/cloudapps/reports/mochareports/report-$TODAY.json --reportDir cypress/integration/cloudapps/reports/mochareports --inline",
     "cloudapps:posttest": "npm run cloudapps:combine-reports && npm run cloudapps:generate-report && npm run cloudapps:html",
 
     "cloudapps:api:local:report": "npm run cloudapps:clean:reports ; npm run cloudapps:api:local ; npm run cloudapps:posttest ; sh echo_message.sh",
