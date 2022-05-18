@@ -52,11 +52,21 @@
 
     "cloudapps:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json'",
     "cloudapps:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json'",
-    "cloudapps:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true ; sh echo_message.sh",
+    "cloudapps:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true",
 
     "cloudapps:stage": "npx cypress run --quiet --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json'",
     "cloudapps:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json'",
-    "cloudapps:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
+    "cloudapps:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true",
+
+    "cloudapps:clean:reports": "rm -rf cypress/integration/cloudapps/reports && mkdir cypress/integration/cloudapps/reports && mkdir cypress/integration/cloudapps/reports/mochareports",
+    "cloudapps:combine-reports": "mochawesome-merge cypress/integration/cloudapps/reports/mochawesome/*.json > cypress/integration/cloudapps/reports/mochareports/report.json",
+    "cloudapps:generate-report": "marge cypress/integration/cloudapps/reports/mochareports/report.json -f report -o cypress/integration/cloudapps/reports/mochareports",
+    "cloudapps:html": "marge cypress/integration/cloudapps/reports/mochareports/report.json --reportDir cypress/integration/cloudapps/reports/mochareports --inline",
+    "cloudapps:posttest": "npm run cloudapps:combine-reports && npm run cloudapps:generate-report && npm run cloudapps:html",
+
+    "cloudapps:api:local:report": "npm run cloudapps:clean:reports ; npm run cloudapps:api:local ; npm run cloudapps:posttest ; sh echo_message.sh",
+    "cloudapps:api:stage:report": "npm run cloudapps:clean:reports ; npm run cloudapps:api:stage ; npm run cloudapps:posttest ; sh echo_message.sh",
+    "cloudapps:api:production:report": "npm run cloudapps:clean:reports ; npm run cloudapps:api:production ; npm run cloudapps:posttest ; sh echo_message.sh",
 
     "test": "cypress open",
     "silent": "cypress run",
