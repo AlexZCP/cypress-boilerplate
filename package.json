@@ -26,6 +26,30 @@
     "cloudcore:api:stage:report": "npm run cloudcore:clean:reports ; npm run cloudcore:api:stage ; npm run cloudcore:posttest ; sh echo_message.sh",
     "cloudcore:api:production:report": "npm run cloudcore:clean:reports ; npm run cloudcore:api:production ; npm run cloudcore:posttest ; sh echo_message.sh",
 
+    "cloudadmin:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
+    "cloudadmin:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
+    "cloudadmin:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/api/**/*' 1> test-results.txt || true",
+    "cloudadmin:ui:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/ui/**/*' 1> test-results.txt || true",
+
+    "cloudadmin:stage": "npx cypress run --quiet --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
+    "cloudadmin:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
+    "cloudadmin:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/api/**/*' 1> test-results.txt || true",
+    "cloudadmin:ui:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/ui/**/*' 1> test-results.txt || true",
+
+    "cloudadmin:clean:reports": "rm -rf cypress/integration/cloudadmin/reports && mkdir cypress/integration/cloudadmin/reports && mkdir cypress/integration/cloudadmin/reports/mochareports",
+    "cloudadmin:combine-reports": "mochawesome-merge cypress/integration/cloudadmin/reports/mochawesome/*.json > cypress/integration/cloudadmin/reports/mochareports/report.json",
+    "cloudadmin:generate-report": "marge cypress/integration/cloudadmin/reports/mochareports/report.json -f report -o cypress/integration/cloudadmin/reports/mochareports",
+    "cloudadmin:html": "marge cypress/integration/cloudadmin/reports/mochareports/report.json --reportDir cypress/integration/cloudadmin/reports/mochareports --inline",
+    "cloudadmin:posttest": "npm run cloudadmin:combine-reports && npm run cloudadmin:generate-report && npm run cloudadmin:html",
+
+    "cloudadmin:api:local:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:api:local ; npm run cloudadmin:posttest ; sh echo_message.sh",
+    "cloudadmin:api:stage:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:api:stage ; npm run cloudadmin:posttest ; sh echo_message.sh",
+    "cloudadmin:api:production:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:api:production ; npm run cloudadmin:posttest ; sh echo_message.sh",
+
+    "cloudadmin:ui:local:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:ui:local ; npm run cloudadmin:posttest ; sh echo_message.sh",
+    "cloudadmin:ui:stage:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:ui:stage ; npm run cloudadmin:posttest ; sh echo_message.sh",
+    "cloudadmin:ui:production:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:ui:production ; npm run cloudadmin:posttest ; sh echo_message.sh",
+
     "cloudapps:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json'",
     "cloudapps:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json'",
     "cloudapps:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true ; sh echo_message.sh",
@@ -33,17 +57,6 @@
     "cloudapps:stage": "npx cypress run --quiet --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json'",
     "cloudapps:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json'",
     "cloudapps:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
-
-
-    "cloudadmin:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
-    "cloudadmin:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
-    "cloudadmin:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
-    "cloudadmin:ui:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/ui/**/*' 1> test-results.txt || true && sh echo_message.sh",
-
-    "cloudadmin:stage": "npx cypress run --quiet --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
-    "cloudadmin:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
-    "cloudadmin:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/api/**/*' 1> test-results.txt || true && sh echo_message.sh",
-    "cloudadmin:ui:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/ui/**/*' 1> test-results.txt || true && sh echo_message.sh",
 
     "test": "cypress open",
     "silent": "cypress run",
