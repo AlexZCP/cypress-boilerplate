@@ -1,24 +1,23 @@
-describe('Make reorder', () => {
+import { orderRequestBody, orderReference } from "./misc.js";
 
-  let orderRequestBody = Cypress.env('order_request_body')
-  orderRequestBody.reference = "qa-" + "reorder-" + Math.floor((Math.random() * 99999))
-  orderRequestBody.items[0]['items : reorder_cause'] = "Item shipped but never received"
-  
+describe("Make reorder", () => {
+  orderRequestBody.reference = "reorder-" + orderReference;
+  orderRequestBody.items[0]["items : reorder_cause"] =
+    "Item shipped but never received";
+
   before(() => {
     cy.request({
-      method: 'POST',
-      url: 'orders/add',
-      headers:{
-          'content-type': 'application/json'
-      },
-      body: orderRequestBody
-    }).as('addReOrder');
+      method: "POST",
+      url: "orders/add",
+      headers: { "content-type": "application/json" },
+      body: orderRequestBody,
+    }).as("addReOrder");
   });
 
-  it('should get 201 status', () => {
-    cy.get('@addReOrder').then(addReOrder => {
+  it("should get 201 status", () => {
+    cy.get("@addReOrder").then((addReOrder) => {
       expect(addReOrder.status).to.eq(201);
-      expect(addReOrder.body.order).to.eq(orderRequestBody.reference)
-      })
+      expect(addReOrder.body.order).to.eq(orderRequestBody.reference);
+    });
   });
 });

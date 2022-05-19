@@ -1,25 +1,18 @@
-describe('Add order quote', () => {
-  
-beforeEach(() => {
-  cy.request({
-    method: 'POST',
-    url: Cypress.env("url"),
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: Cypress.env("order_quote_request_body")
-  }).as('orderQuoteRequest');
-});
+import { orderQuoteRequest } from "./misc.js";
 
-  it('should get status 200', () => {
-    cy.get('@orderQuoteRequest').then(orderQuote => {
-      expect(orderQuote.status).to.eq(200);
-      })
-  });
-
-  it('should verify vat value', () => {
-    cy.get('@orderQuoteRequest').then(orderQuote => {
-        expect(orderQuote.body.vat).to.eq("0.0000");
-      })
+describe("Add order quote", () => {
+  context("POST /orders/quote", () => {
+    it("adds quote", () => {
+      cy.request({
+        method: "POST",
+        url: "orders/quote",
+        headers: { "content-type": "application/json" },
+        body: orderQuoteRequest,
+      }).then((response) => {
+        expect(response.status).to.eq(200);
+        expect(response.body.vat).to.eq("0.0000");
+        expect(response.body.shipments[0].quotes[0].quote).to.exist;
+      });
+    });
   });
 });

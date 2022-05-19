@@ -1,28 +1,23 @@
-describe('Get order log', () => {
+import { hardcodedOrderReferenceRequest } from "./misc.js";
 
- let orderLogRequest = Cypress.env('get_order_info_request')
-
+describe("Get order log", () => {
   beforeEach(() => {
     cy.request({
-      method: 'POST',
-      url: 'orders/log',
-      headers:{
-          'content-type': 'application/json'
-      },
-      body: orderLogRequest
-    }).as('orderLog');
+      method: "POST",
+      url: "orders/log",
+      headers: { "content-type": "application/json" },
+      body: hardcodedOrderReferenceRequest,
+    }).as("orderLog");
   });
 
-  it('should get 200 status', () => {
-    cy.get('@orderLog').then(orderLog => {
-      expect(orderLog.status).to.eq(200)
-      })
-  });
-
-  it('should get the order state and date created', () => {
-    cy.get('@orderLog').then(orderLog => {
+  it("POST /orders/log", () => {
+    cy.get("@orderLog").then((orderLog) => {
+      expect(orderLog.status).to.eq(200);
+      expect(orderLog.body[0].reference).to.eq(
+        hardcodedOrderReferenceRequest.reference
+      );
       expect(orderLog.body[0].create_date).to.exist;
-      expect(orderLog.body[0].state).to.exist
-      })
+      expect(orderLog.body[0].state).to.exist;
+    });
   });
 });

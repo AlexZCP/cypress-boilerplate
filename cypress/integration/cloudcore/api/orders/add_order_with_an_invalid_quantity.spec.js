@@ -1,8 +1,7 @@
+import { INVALID_ORDER_COUNT, orderRequestBody } from './misc.js';
+
 describe('Add order with invalid quantity', () => {
 
-  const INVALID_ORDER_COUNT = 1001
-  let orderRequestBody = Cypress.env('order_request_body')
-  orderRequestBody.reference = "qa" + Math.floor((Math.random() * 99999));
   orderRequestBody.items[0].count = INVALID_ORDER_COUNT
   
   before(() => {
@@ -10,16 +9,14 @@ describe('Add order with invalid quantity', () => {
       method: 'POST',
       url: 'orders/add',
       failOnStatusCode: false,
-      headers:{
-          'content-type': 'application/json'
-      },
+      headers:{  'content-type': 'application/json' },
       body: orderRequestBody
     }).as('addOrder');
   });
 
   it('should get status 400 Bad request', () => {
     cy.get('@addOrder').then(addOrder => {
-      expect(addOrder.status).to.eq(201);
+      expect(addOrder.status).to.eq(400);
       })
   });
 });

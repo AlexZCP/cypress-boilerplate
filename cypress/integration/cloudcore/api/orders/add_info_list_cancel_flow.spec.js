@@ -1,9 +1,10 @@
-describe("Orders API", () => {
-  let orderRequestBody = Cypress.env("order_request_body");
+import {
+  orderRequestBody,
+  orderReference,
+  orderRequestReference,
+} from "./misc.js";
 
-  orderRequestBody.reference = "qa" + Math.floor(Math.random() * 99999);
-  let orderReference = orderRequestBody.reference;
-
+describe("Order flow: add, info, list, cancel", () => {
   // ----------ADD ORDER
 
   context("POST /orders/add", () => {
@@ -20,7 +21,7 @@ describe("Orders API", () => {
     });
   });
 
-  //----------INFO
+  // ----------INFO
 
   context("POST /orders/info", () => {
     it("retrieves information about order", () => {
@@ -39,37 +40,16 @@ describe("Orders API", () => {
   // ----------LIST OF ORDERS
 
   context("POST /orders", () => {
-    it("retrieves an array of orders", () => {
+    it("retrieves an array of orders with latest created order", () => {
       cy.request({
         method: "POST",
         url: "orders",
         headers: { "content-type": "application/json" },
-        body: { apikey: orderRequestBody.apikey },
+        body: { apikey: Cypress.env("apikey") },
       }).then((response) => {
         expect(response.status).to.eq(200);
+        expect(response.body[0].reference).to.eq(orderReference);
         assert.isArray(response.body, "Order list is an array");
-      });
-    });
-  });
-
-  // ----------ORDER LOGS
-
-  let orderRequestReference = {
-    apikey: orderRequestBody.apikey,
-    reference: orderReference,
-  };
-
-  context("POST /orders/log", () => {
-    it("retrieves logs of the order", () => {
-      cy.request({
-        method: "POST",
-        url: "orders/log",
-        headers: { "content-type": "application/json" },
-        body: orderRequestReference,
-      }).then((response) => {
-        expect(response.status).to.eq(201);
-        expect(response.body[0].create_date).to.exist;
-        expect(response.body[0].state).to.exist;
       });
     });
   });

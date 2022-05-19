@@ -1,6 +1,5 @@
-describe('Gets info about product', () => {
-
-  let productReference = Cypress.env("products").reference
+describe("Gets info about product", () => {
+  let productReference = Cypress.env("products").reference;
 
   context("POST /products/info", () => {
     it("gets info about product", () => {
@@ -8,15 +7,14 @@ describe('Gets info about product', () => {
         method: "POST",
         url: "products/info",
         headers: { "content-type": "application/json" },
-        body: { 
+        body: {
           apikey: Cypress.env("apikey"),
-          reference: productReference
-       },
+          reference: productReference,
+        },
       }).then((response) => {
-        expect(response.status).to.eq(208);
-        expect(response.body.reference).to.eq(productReference)
+        expect(response.status).to.eq(200);
+        expect(response.body.reference).to.eq(productReference);
       });
     });
   });
-
 });
