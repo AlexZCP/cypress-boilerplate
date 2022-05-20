@@ -1,0 +1,26 @@
+{
+  "baseUrl": "https://api.thevividtiger.com/cloudcore/1.0",
+  "integrationFolder": "cypress/integration/cloudcore/",
+  "testFiles": "**/*.spec.js",
+
+  "video": false,
+  "screenshotOnRunFailure": false,
+
+  "reporter": "cypress-multi-reporters",
+    "reporterOptions": {
+        "reporterEnabled": "mochawesome",
+        "mochawesomeReporterOptions": {
+            "reportDir": "cypress/integration/cloudcore/reports/mochawesome",
+            "reportFilename": "[status]_[datetime]-report",
+            "timestamp": "longDate",
+            "quite": true,
+            "overwrite": false,
+            "html": false,
+            "json": true
+        }
+    },
+
+  "env": {
+    "app_name": "cloudcore"
+  }
+}

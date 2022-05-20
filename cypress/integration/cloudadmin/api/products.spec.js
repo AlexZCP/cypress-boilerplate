@@ -1,7 +1,6 @@
 describe('Products Core API testing', () => {
 
   it('Fetches product items - POST', () => {
-    
     cy.request({
       method: 'POST',
       url: 'bluecloud/products',

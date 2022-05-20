@@ -4,14 +4,93 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+
+    "cloudcore:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json'",
+    "cloudcore:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json'",
+    "cloudcore:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true",
+
+    "cloudcore:stage": "npx cypress run --quiet --env environment=stage --config-file 'cypress/integration/cloudcore/config/cypress.json'",
+    "cloudcore:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudcore/config/cypress.json'",
+    "cloudcore:api:stage": "npx cypress run --env environment=stage --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true",
+
+    "cloudcore:production": "npx cypress run --quiet --env environment=production --config-file 'cypress/integration/cloudcore/config/cypress.json'",
+    "cloudcore:open:production": "npx cypress open --env environment=production --config-file 'cypress/integration/cloudcore/config/cypress.json'",
+    "cloudcore:api:production": "npx cypress run  --env environment=production --config-file 'cypress/integration/cloudcore/config/cypress.json' --spec 'cypress/integration/cloudcore/api/**/*' 1> test-results.txt || true",
+
+    "cloudcore:clean:reports": "rm -rf cypress/integration/cloudcore/reports && mkdir cypress/integration/cloudcore/reports && mkdir cypress/integration/cloudcore/reports/mochareports",
+    "cloudcore:combine-reports": "TODAY=$(date \"+%Y-%m-%d\"); mochawesome-merge cypress/integration/cloudcore/reports/mochawesome/*.json > cypress/integration/cloudcore/reports/mochareports/report-$TODAY.json",
+    "cloudcore:generate-report": "TODAY=$(date \"+%Y-%m-%d\"); marge cypress/integration/cloudcore/reports/mochareports/report-$TODAY.json -f report -o cypress/integration/cloudcore/reports/mochareports",
+    "cloudcore:html": "TODAY=$(date \"+%Y-%m-%d\"); marge cypress/integration/cloudcore/reports/mochareports/report-$TODAY.json --reportDir cypress/integration/cloudcore/reports/mochareports --inline",
+    "cloudcore:posttest": "npm run cloudcore:combine-reports && npm run cloudcore:generate-report && npm run cloudcore:html",
+
+    "cloudcore:api:local:report": "npm run cloudcore:clean:reports ; npm run cloudcore:api:local ; npm run cloudcore:posttest ; sh echo_message.sh",
+    "cloudcore:api:stage:report": "npm run cloudcore:clean:reports ; npm run cloudcore:api:stage ; npm run cloudcore:posttest ; sh echo_message.sh",
+    "cloudcore:api:production:report": "npm run cloudcore:clean:reports ; npm run cloudcore:api:production ; npm run cloudcore:posttest ; sh echo_message.sh",
+
+    "cloudadmin:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
+    "cloudadmin:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
+    "cloudadmin:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/api/**/*' 1> test-results.txt || true",
+    "cloudadmin:ui:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/ui/**/*' 1> test-results.txt || true",
+
+    "cloudadmin:stage": "npx cypress run --quiet --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
+    "cloudadmin:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json'",
+    "cloudadmin:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/api/**/*' 1> test-results.txt || true",
+    "cloudadmin:ui:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudadmin/config/cypress.json' --spec 'cypress/integration/cloudadmin/ui/**/*' 1> test-results.txt || true",
+
+    "cloudadmin:clean:reports": "rm -rf cypress/integration/cloudadmin/reports && mkdir cypress/integration/cloudadmin/reports && mkdir cypress/integration/cloudadmin/reports/mochareports",
+    "cloudadmin:combine-reports": "TODAY=$(date \"+%Y-%m-%d\"); mochawesome-merge cypress/integration/cloudadmin/reports/mochawesome/*.json > cypress/integration/cloudadmin/reports/mochareports/report-$TODAY.json",
+    "cloudadmin:generate-report": "TODAY=$(date \"+%Y-%m-%d\"); marge cypress/integration/cloudadmin/reports/mochareports/report-$TODAY.json -f report -o cypress/integration/cloudadmin/reports/mochareports",
+    "cloudadmin:html": "TODAY=$(date \"+%Y-%m-%d\"); marge cypress/integration/cloudadmin/reports/mochareports/report-$TODAY.json --reportDir cypress/integration/cloudadmin/reports/mochareports --inline",
+    "cloudadmin:posttest": "npm run cloudadmin:combine-reports && npm run cloudadmin:generate-report && npm run cloudadmin:html",
+
+    "cloudadmin:api:local:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:api:local ; npm run cloudadmin:posttest ; sh echo_message.sh",
+    "cloudadmin:api:stage:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:api:stage ; npm run cloudadmin:posttest ; sh echo_message.sh",
+    "cloudadmin:api:production:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:api:production ; npm run cloudadmin:posttest ; sh echo_message.sh",
+
+    "cloudadmin:ui:local:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:ui:local ; npm run cloudadmin:posttest ; sh echo_message.sh",
+    "cloudadmin:ui:stage:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:ui:stage ; npm run cloudadmin:posttest ; sh echo_message.sh",
+    "cloudadmin:ui:production:report": "npm run cloudadmin:clean:reports ; npm run cloudadmin:ui:production ; npm run cloudadmin:posttest ; sh echo_message.sh",
+
+    "cloudapps:local": "npx cypress run --quiet --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json'",
+    "cloudapps:open:local": "npx cypress open --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json'",
+    "cloudapps:api:local": "npx cypress run  --env environment=local --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true",
+
+    "cloudapps:stage": "npx cypress run --quiet --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json'",
+    "cloudapps:open:stage": "npx cypress open --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json'",
+    "cloudapps:api:stage": "npx cypress run  --env environment=stage --config-file 'cypress/integration/cloudapps/config/cypress.json' --spec 'cypress/integration/cloudapps/api/**/*' 1> test-results.txt || true",
+
+    "cloudapps:clean:reports": "rm -rf cypress/integration/cloudapps/reports && mkdir cypress/integration/cloudapps/reports && mkdir cypress/integration/cloudapps/reports/mochareports",
+    "cloudapps:combine-reports": "TODAY=$(date \"+%Y-%m-%d\"); mochawesome-merge cypress/integration/cloudapps/reports/mochawesome/*.json > cypress/integration/cloudapps/reports/mochareports/report-$TODAY.json",
+    "cloudapps:generate-report": "TODAY=$(date \"+%Y-%m-%d\"); marge cypress/integration/cloudapps/reports/mochareports/report-$TODAY.json -f report -o cypress/integration/cloudapps/reports/mochareports",
+    "cloudapps:html": "TODAY=$(date \"+%Y-%m-%d\"); marge cypress/integration/cloudapps/reports/mochareports/report-$TODAY.json --reportDir cypress/integration/cloudapps/reports/mochareports --inline",
+    "cloudapps:posttest": "npm run cloudapps:combine-reports && npm run cloudapps:generate-report && npm run cloudapps:html",
+
+    "cloudapps:api:local:report": "npm run cloudapps:clean:reports ; npm run cloudapps:api:local ; npm run cloudapps:posttest ; sh echo_message.sh",
+    "cloudapps:api:stage:report": "npm run cloudapps:clean:reports ; npm run cloudapps:api:stage ; npm run cloudapps:posttest ; sh echo_message.sh",
+    "cloudapps:api:production:report": "npm run cloudapps:clean:reports ; npm run cloudapps:api:production ; npm run cloudapps:posttest ; sh echo_message.sh",
+
     "test": "cypress open",
     "silent": "cypress run",
-    "silent:api": "cypress run --reporter progress --spec 'cypress/integration/api-tests/**/*'"
+    "silent:api": "cypress run --reporter progress --spec 'cypress/integration/api-tests/**/*'",
+    "ui-tests": "cypress run --reporter progress --spec 'cypress/integration/ui-tests/**/*'",
+    "log-report-to-file": "cypress run --quiet 1> test-results.txt || true && sh echo_message.sh"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^9.6.0"
+    "cypress": "^9.6.0",
+    "cypress-localstorage-commands": "^1.7.0",
+    "dotenv": "^16.0.1",
+    "puppeteer": "^13.7.0",
+    "read-config": "^2.0.0"
+  },
+  "devDependencies": {
+    "cypress-mochawesome-reporter": "^3.0.1",
+    "cypress-multi-reporters": "^1.6.0",
+    "mocha": "^10.0.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.2.1",
+    "mochawesome-report-generator": "^6.2.0"
   }
 }

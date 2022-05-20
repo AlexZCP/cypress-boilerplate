@@ -1,0 +1,26 @@
+{
+  "baseUrl": "https://api.thevividtiger.com/cloudadmin/1.0/",
+  "integrationFolder": "cypress/integration/cloudadmin",
+  "testFiles": "**/*.spec.js",
+
+  "video": false,
+  "screenshotOnRunFailure": false,
+
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+      "reporterEnabled": "mochawesome",
+      "mochawesomeReporterOptions": {
+          "reportDir": "cypress/integration/cloudadmin/reports/mochawesome",
+          "reportFilename": "[status]_[datetime]-report",
+          "timestamp": "longDate",
+          "quite": true,
+          "overwrite": false,
+          "html": false,
+          "json": true
+      }
+  },
+
+  "env": {
+    "app_name": "cloudadmin"
+  }
+}
